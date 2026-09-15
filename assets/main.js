@@ -12,15 +12,18 @@ const defaultFont = document.body.dataset.font || 'nunito';
 const fontStorageKey = 'academic-homepage-font-preview-rounded-v1';
 
 if (showFontPreview) {
-  document.querySelector('#font-preview').hidden = false;
-  if (new URLSearchParams(location.search).get('compare') === 'rounded') {
-    document.querySelector('#font-preview > details').open = true;
+  const previewPanel = document.querySelector('#font-preview');
+  if (previewPanel) previewPanel.hidden = false;
+  if (previewPanel && new URLSearchParams(location.search).get('compare') === 'rounded') {
+    previewPanel.querySelector('details').open = true;
   }
   function applyFont(value) {
     const font = Object.hasOwn(fontNames, value) ? value : defaultFont;
     document.body.dataset.font = font;
-    document.querySelector('#font-current').textContent = fontNames[font];
-    document.querySelector(`input[name="font-choice"][value="${font}"]`).checked = true;
+    const currentLabel = document.querySelector('#font-current');
+    const selectedInput = document.querySelector(`input[name="font-choice"][value="${font}"]`);
+    if (currentLabel) currentLabel.textContent = fontNames[font];
+    if (selectedInput) selectedInput.checked = true;
   }
   let savedFont = defaultFont;
   try { savedFont = localStorage.getItem(fontStorageKey) || savedFont; } catch { /* File previews may restrict storage. */ }
@@ -37,6 +40,7 @@ const navigationLinks = [...document.querySelectorAll('nav a[href^="#"]')];
 const sections = navigationLinks.map(link => document.querySelector(link.hash));
 
 function updateNavigation() {
+  if (!sections.length) return;
   const threshold = document.querySelector('.site-header').getBoundingClientRect().height + 52;
   let current = sections[0];
   for (const section of sections) {
