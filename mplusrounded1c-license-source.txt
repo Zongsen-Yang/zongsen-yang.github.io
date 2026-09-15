@@ -1,5 +1,0 @@
-License: SIL Open Font License 1.1 (OFL).
-Copyright notice: extracted unchanged from the bundled font name table.
-License designation and copyright confirmed by Google Fonts metadata:
-https://raw.githubusercontent.com/google/fonts/main/ofl/mplusrounded1c/METADATA.pb
-Standard OFL terms copied unchanged from the bundled Nunito OFL.txt.
